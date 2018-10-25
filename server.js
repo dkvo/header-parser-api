@@ -16,7 +16,10 @@ app.get('/api/whoami', (req, res) => {
     var ip = req.get('x-forwarded-for');
     if(ip) {
         const arr =  ip.split(',');
+        console.log(arr);
         resObject.ipaddress = arr[arr.length - 1];
+    }else {
+        resObject.ipaddress = req.connection.remoteAddress;
     }
     res.status(200).send(JSON.stringify(resObject));
 })
