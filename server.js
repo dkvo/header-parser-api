@@ -8,12 +8,16 @@ app.get('/', (req, res) => {
     res.sendFile(__dirname + 'index.html');
 });
 app.get('/api/whoami', (req, res) => {
-    console.log(req.ip);
-    let resObject = {
-        ipaddress: req.ip,
+    var resObject = {
+        ipaddress: '',
         language: req.get('accept-language'),
         software: req.get('user-agent')
     };
+    var ip = req.get('x-forwarded-for');
+    if(ip) {
+        const arr =  ip.split(',');
+        resObject.ipaddress = arr[arr.length - 1];
+    }
     res.status(200).send(JSON.stringify(resObject));
 })
 
