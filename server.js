@@ -14,7 +14,6 @@ app.get('/api/whoami', (req, res) => {
         language: req.get('accept-language'),
         software: req.get('user-agent')
     };
-    console.log(resObject);
     res.status(200).send(JSON.stringify(resObject));
 })
 
