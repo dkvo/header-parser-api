@@ -4,9 +4,31 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" type="text/css" href="style.css">
     <title>Request Header Parser</title>
 </head>
 <body>
     <h1>API Project: Request Headers Parser</h1>
+    <div class="explanation">
+        <ol>
+            <h4>User Direction:</h4>
+            <li>The API end point is <strong>GET https://headers-parse.herokuapp.com/api/whoami</strong>.</li>
+            <li>This API simply returns information about the local machine that open the link to the API</li>
+            <li>THese information include the computer's IP address, the language that the client is capable of 
+            understanding and information about the browser and the local computer.</li>
+        </ol>
+        <div class="usage">
+            <h4>Usage:</h4>
+            <a href="https://headers-parse.herokuapp.com/api/whoami">https://headers-parse.herokuapp.com/api/whoami</a>
+        </div>
+        <div class="output">
+            <h4>Example Output:</h4>
+            <p><strong>{
+                ipAddress: "192.168.1.233",
+                language: "en-US,en;q=0.9,vi;q=0.8",
+                software: "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_13_4) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/69.0.3497.100 Safari/537.36"
+                }</strong></p>
+        </div>
+    </div>    
 </body>
 </html>

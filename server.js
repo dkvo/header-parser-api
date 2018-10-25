@@ -1,26 +1,29 @@
+const os = require('os');
 const express = require('express');
 
 const port = process.env.PORT || 3000;
 const app = express();
-app.get('/', express.static(__dirname));
+app.use('/', express.static(__dirname));
 
 app.get('/', (req, res) => {
     res.sendFile(__dirname + 'index.html');
 });
 app.get('/api/whoami', (req, res) => {
+    const interfaces = os.networkInterfaces();
+    var ipAddress;
+    for(var i in interfaces) {
+        for(var k in interfaces[i]) {
+            if(interfaces[i][k].family == 'IPv4' && !interfaces[i][k].internal) {
+                ipAddress = interfaces[i][k].address;
+            }
+        }
+    }
+    console.log(ipAddress);
     var resObject = {
-        ipaddress: '',
+        ipAddress,
         language: req.get('accept-language'),
         software: req.get('user-agent')
     };
-    var ip = req.get('x-forwarded-for');
-    if(ip) {
-        const arr =  ip.split(',');
-        console.log(arr);
-        resObject.ipaddress = arr[arr.length - 1];
-    }else {
-        resObject.ipaddress = req.connection.remoteAddress;
-    }
     res.status(200).send(JSON.stringify(resObject));
 })
 
